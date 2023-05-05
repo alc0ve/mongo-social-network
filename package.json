@@ -1,0 +1,19 @@
+{
+  "name": "Mongo-social-network",
+  "version": "1.0.1",
+  "description": "Social-api-using-mongo-mongoose",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.13",
+    "dayjs": "^1.11.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
+  }
+}
