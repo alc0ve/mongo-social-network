@@ -1,31 +1,26 @@
 const { Schema, model } = require('mongoose');
 
-// Schema to create a course model
-const courseSchema = new Schema(
+const thoughtSchema = new Schema(
   {
-    courseName: {
+    thoughtText: {
+      type: String,
+      required: true,
+      min: 1,
+      max: 280,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+      //Use a getter method to format the timestamp on query
+    },
+    //the user that created this thought
+    username: {
       type: String,
       required: true,
     },
-    inPerson: {
-      type: Boolean,
-      default: true,
-    },
-    startDate: {
-      type: Date,
-      default: Date.now(),
-    },
-    endDate: {
-      type: Date,
-      // Sets a default value of 12 weeks from now
-      default: () => new Date(+new Date() + 84 * 24 * 60 * 60 * 1000),
-    },
-    students: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Student',
-      },
-    ],
+    //these are like replies
+    //array of nested docs created with the 'reactionSchema'
+    reactions: [reactionSchema],
   },
   {
     toJSON: {
@@ -35,6 +30,40 @@ const courseSchema = new Schema(
   }
 );
 
-const Course = model('course', courseSchema);
+const reactionSchema = new Schema (
+  {
+    reactionId: {
+      type: Schema.Types.ObjectId,
+      default: () => Types.ObjectId(),
+    },
+    reactionBody: {
+      type: String,
+      required: true,
+      max: 280,
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+      //use a getter method to format the timestamp on query
+    },
+  },
+  {
+    toJSON: {
+      virtuals: true,
+    },
+    id: false,
+  }
+);
 
-module.exports = Course;
+const Thought = model('thought', thoughtSchema);
+
+module.exports = Thought;
+
+
+
+      // Sets a default value of 12 weeks from now
+      // default: () => new Date(+new Date() + 84 * 24 * 60 * 60 * 1000),
