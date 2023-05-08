@@ -51,19 +51,20 @@ module.exports = {
   },
   //Updated a user
   updateUser(req,res) {
-    User.findOnendUpdate(
+    User.findOneAndUpdate(
       { _id: req.params.userId},
-      { $set: req.body },
-      { runValidators: true, new: true }
+       { $set: req.body },
+       { runValidators: true, new: true }
       )
     .then((user) => {
       !user
         ? res.status(404).json({ message: 'No user with this ID!' })
-        : User.findOnendUpdate(
-          { _id: req.params.userId},
-          { $set: req.body },
-          { runValidators: true, new: true }
-        ) 
+        : res.json(user)
+        // : User.findOneAndUpdate(
+          // { _id: req.params.userId},
+          // { $set: req.body },
+          // { runValidators: true, new: true }
+        // ) 
     })
     .catch((err) => {
       console.log(err);
