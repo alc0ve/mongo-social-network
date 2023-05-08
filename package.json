@@ -1,5 +1,5 @@
 {
-  "name": "Mongo-social-network",
+  "name": "mongo-social-network",
   "version": "1.0.1",
   "description": "Social-api-using-mongo-mongoose",
   "main": "index.js",
