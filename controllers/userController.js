@@ -16,7 +16,7 @@ module.exports = {
           users,
           userCount: await userCount(),
         };
-        return res.json(userObj);
+        return res.status(200).json(userObj);
       })
       .catch((err) => {
         console.log(err);
@@ -50,7 +50,7 @@ module.exports = {
   // Create a new user
   createUser(req, res) {
     User.create(req.body)
-      .then((user) => res.json(user))
+      .then((user) => res.status(200).json(user))
       .catch((err) => res.status(500).json(err));
   },
   //Updated a user
@@ -63,7 +63,7 @@ module.exports = {
     .then((user) => {
       !user
         ? res.status(404).json({ message: 'No user with this ID!' })
-        : res.json(user)
+        : res.status(200).json(user)
         // : User.findOneAndUpdate(
           // { _id: req.params.userId},
           // { $set: req.body },
@@ -92,7 +92,7 @@ module.exports = {
           ? res.status(404).json({
               message: 'User deleted, but no thoughts found',
             })
-          : res.json({ message: 'User successfully deleted' })
+          : res.status(200).json({ message: 'User successfully deleted' })
       )
       .catch((err) => {
         console.log(err);
@@ -115,7 +115,7 @@ module.exports = {
           ? res
               .status(404)
               .json({ message: 'No user found with that ID!!' })
-          : res.json(user)
+          : res.status(200).json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
@@ -131,7 +131,7 @@ module.exports = {
           ? res
               .status(404)
               .json({ message: 'No user found with that ID!!' })
-          : res.json(user)
+          : res.status(200).json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
