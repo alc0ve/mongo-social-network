@@ -25,23 +25,27 @@ module.exports = {
   },
   // Get a single user
   getSingleUser(req, res) {
-    User.findOne({ _id: req.params.userId })
-      .select('-__v')
-      //after getting user by id, populate thought and friend data
-      .populate("friends")
-      .populate("thoughts")
-      .then(async (user) =>
+    console.log("made it here!")
+    User.findById({ _id: req.params.userId })
+         .then(async (user) =>
         !user
-          ? res.status(404).json({ message: 'No user with that ID!' })
-          : res.json({
-              user,
-              grade: await grade(req.params.userId),
-            })
-      )
-      .catch((err) => {
-        console.log(err);
-        return res.status(500).json(err);
-      });
+         ? res.status(404).json({ message: 'No user with that ID!' })
+         : res.status(200).json(user)
+       )
+    // User.findOne({ _id: req.params.userId })
+    //   .select('-__v')
+    //   //after getting user by id, populate thought and friend data
+    //   .populate("friends")
+    //   .populate("thoughts")
+    //   .then(async (user) =>
+    //     !user
+    //       ? res.status(404).json({ message: 'No user with that ID!' })
+    //       : res.json(user)
+    //   )
+    //   .catch((err) => {
+    //     console.log(err);
+    //     return res.status(500).json(err);
+    //   });
   },
   // Create a new user
   createUser(req, res) {
