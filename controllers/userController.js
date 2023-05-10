@@ -32,6 +32,10 @@ module.exports = {
          ? res.status(404).json({ message: 'No user with that ID!' })
          : res.status(200).json(user)
        )
+             .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err);
+      });
     // User.findOne({ _id: req.params.userId })
     //   .select('-__v')
     //   //after getting user by id, populate thought and friend data
@@ -123,7 +127,7 @@ module.exports = {
   removeFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $pull: { friend: { friendId: req.params.friendId } } },
+      { $pull: { friend: req.params.friendId } },
       { runValidators: true, new: true }
     )
       .then((user) =>
