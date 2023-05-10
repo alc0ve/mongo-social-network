@@ -26,6 +26,7 @@ module.exports = {
       ? res.status(404).json({ message: "No thought with this id!" })
       : User.findByIdAndUpdate(
           req.body.userId,
+          //add thought id created to 'thought' array when user info is pulled
           { $push: { thoughts: thought._id }},
           { runValidators: true, new: true }
         )
