@@ -4,7 +4,7 @@ module.exports = {
   // Get all thoughts
   getThoughts(req, res) {
     Thought.find()
-      .then((thoughts) => res.json(thoughts))
+      .then((thoughts) => res.status(200).json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
   // Get a thought
@@ -14,14 +14,14 @@ module.exports = {
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: 'No thought with this ID!' })
-          : res.json(thought)
+          : res.status(200).json(thought)
       )
       .catch((err) => res.status(500).json(err));
   },
   // Create a thought
   createThought(req, res) {
     Thought.create(req.body)
-      .then((thought) => res.json(thought))
+      .then((thought) => res.status(200).json(thought))
       .catch((err) => {
         console.log(err);
         return res.status(500).json(err);
@@ -35,7 +35,7 @@ module.exports = {
           ? res.status(404).json({ message: 'No thought with this ID!' })
           : User.deleteMany({ _id: { $in: thought.users } })
       )
-      .then(() => res.json({ message: 'Thought and users deleted!' }))
+      .then(() => res.status(200).json({ message: 'Thought and users deleted!' }))
       .catch((err) => res.status(500).json(err));
   },
   // Update a thought
@@ -48,7 +48,7 @@ module.exports = {
       .then((thought) =>
         !thought
           ? res.status(404).json({ message: 'No thought with this ID!!' })
-          : res.json(thought)
+          : res.status(200).json(thought)
       )
       .catch((err) => res.status(500).json(err));
   },
