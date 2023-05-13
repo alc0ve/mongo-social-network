@@ -1,4 +1,3 @@
-const { ObjectId } = require('mongoose').Types;
 const { User, Thought } = require('../models');
 
 // Aggregate function to get the users overall
@@ -36,20 +35,6 @@ module.exports = {
         console.log(err);
         return res.status(500).json(err);
       });
-    // User.findOne({ _id: req.params.userId })
-    //   .select('-__v')
-    //   //after getting user by id, populate thought and friend data
-    //   .populate("friends")
-    //   .populate("thoughts")
-    //   .then(async (user) =>
-    //     !user
-    //       ? res.status(404).json({ message: 'No user with that ID!' })
-    //       : res.json(user)
-    //   )
-    //   .catch((err) => {
-    //     console.log(err);
-    //     return res.status(500).json(err);
-    //   });
   },
   // Create a new user
   createUser(req, res) {
@@ -68,11 +53,6 @@ module.exports = {
       !user
         ? res.status(404).json({ message: 'No user with this ID!' })
         : res.status(200).json(user)
-        // : User.findOneAndUpdate(
-          // { _id: req.params.userId},
-          // { $set: req.body },
-          // { runValidators: true, new: true }
-        // ) 
     })
     .catch((err) => {
       console.log(err);
@@ -110,7 +90,6 @@ module.exports = {
     console.log(req.body);
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      // { $addToSet: { friends: req.body } },
       { $push: { friends: req.params.friendId } },
       { runValidators: true, new: true }
     )

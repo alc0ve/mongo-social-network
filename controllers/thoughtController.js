@@ -32,11 +32,6 @@ module.exports = {
         )
   .then(() => res.status(200).json({ message: 'Thought created!' }))
   .catch((err) => res.status(500).json(err)))
-      // .then((thought) => res.status(200).json(thought))
-      // .catch((err) => {
-      //   console.log(err);
-      //   return res.status(500).json(err);
-      // });
   },
   // Delete a thought
   deleteThought(req, res) {
@@ -63,5 +58,33 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  
+  //post reaction
+  createReaction(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $push: {reactions: req.body} },
+      { runValidators: true, new: true }
+    )
+      .then((thought) =>
+        ! thought
+          ? res.status(404).json({ message: 'No thought with this ID!!' })
+          : res.status(200).json(thought)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+  deleteReaction(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $pull: { reactions: {reactionId: req.params.reactionId}}},
+      { runValidators: true, new: true }
+    )
+      .then((reaction) =>
+        !reaction
+          ? res
+              .status(404)
+              .json({ message: 'No reaction found with that ID!!' })
+          : res.status(200).json(reaction)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 };
