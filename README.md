@@ -47,7 +47,7 @@ Copyright © 2023 Christina Hall
 This project is licensed under the MIT license. For more information about this license and what it entails, visit the MIT website <a href="https://opensource.org/licenses/MIT">here</a>.
 
 ## Tests
-Endpoints were tested with Insomnia. If you should find any issues, see below on contibuting guidlines or submit a issue with a detailed explanation on how to recreate the bug.
+Endpoints were tested with Insomnia. If you should find any issues, see below on contibuting guidlines or submit an issue with a detailed explanation on how to recreate the bug.
 
 ## Credits
 <li><a href="https://github.com/tlequernaque" target="_blank">Terry Lequernaque</a>: Full-Stack Developer</li>
