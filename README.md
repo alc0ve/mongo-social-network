@@ -26,7 +26,7 @@ To use the package run 'npm start' which will sync the database and start the se
 Nodemon is a dependency included in this application, so 'npm run dev' will also work with additional details whilst the app is running.
 
 ## Demo / Screenshots
-Live URL: <a href="deployed link">Deployment Link</a>
+Demo Video URL: <a href="https://drive.google.com/file/d/1yieJ3CDjr-bdrDLFXH0XeuzhL7ISA_Aa/view?usp=sharing">Demo Link</a>
 
 ![Screenshot-allUsers-mongodb](https://github.com/alc0ve/mongo-social-network/assets/117237641/da524dd2-5eeb-4e73-b564-af69880223be)
 
